@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 // import { logRoles } from "@testing-library/react";
 import App from "./App";
 
-test("button is available on first render", () => {
+test("button has correct initial color and updates when clicked.", () => {
   //logRoles is useful for testing when you have a very large page and dont know some of roles.
   // const { container } = render(<App />);
   // logRoles(container);
@@ -13,6 +13,20 @@ test("button is available on first render", () => {
   expect(buttonElement).toHaveStyle({
     "background-color": "red",
   });
+
+  //click button
+  fireEvent.click(buttonElement);
+
+  //expect the background to be blue
+  expect(buttonElement).toHaveStyle({ "background-color": "blue" });
+
+  //expect the button text to be 'Change to Red'
+  expect(buttonElement).toHaveTextContent("Change to red");
 });
 
-test("button turns blue when clicked", () => {});
+// For funtional testing expect to have more than one assertion in a test. For more rigorous unit testing you can have one expect per test.
+// test("button turns blue when clicked", () => {
+//   render(<App />);
+//   const colorButton = screen.getByRole("button", { name: "Change to Blue" });
+
+// });
